@@ -27,6 +27,24 @@ db_cursor.execute("""
     )
 """)
 
+db_cursor.execute("""
+    CREATE TABLE IF NOT EXISTS items (
+        id INT(11) NOT NULL AUTO_INCREMENT,
+        category VARCHAR(255) NOT NULL,
+        subcategory VARCHAR(255) NOT NULL,
+        location VARCHAR(255) NOT NULL,
+        price VARCHAR(255) NOT NULL,
+        contact VARCHAR(255) NOT NULL,
+        description VARCHAR(255) NOT NULL,
+        title VARCHAR(255) NOT NULL,
+        detail1 VARCHAR(255) NOT NULL,
+        detail2 VARCHAR(255) NOT NULL,
+        detail3 VARCHAR(255) NOT NULL,
+        detail4 VARCHAR(255) NOT NULL,
+        PRIMARY KEY (id)
+    )
+""")
+
 # Commit changes to the database
 db_conn.commit()
 
