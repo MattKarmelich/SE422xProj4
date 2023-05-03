@@ -16,7 +16,7 @@ To run the mongo server, just make sure docker is installed and run the followin
 First build the image:
 docker build -t mongo-dev .
 Then
-docker run -it mongo-dev -p 27017:27017
+docker run -p 27017:27017 -it mongo-dev
 '''
 # Database configuration
 mongo_client = MongoClient('mongodb://localhost:27017/')
