@@ -21,7 +21,7 @@ const Housing: React.FC = () => {
       <p>
       <Subcategory title="Condos" path="/housing/condos" /> </p>
       <p>
-        <Subcategory title="Contact" path="/housing/contact" /> 
+      <Subcategory title="Contact" path="/housing/contact" /> 
       </p>
       <button onClick={handleBack}>Back</button>
     </div>
