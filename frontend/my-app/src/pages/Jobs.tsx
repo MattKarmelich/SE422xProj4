@@ -1,21 +1,28 @@
 // pages/ForSale.tsx
 import React from 'react';
 import Subcategory from '../components/Subcategory';
+import { useNavigate } from 'react-router-dom';
 
 const Jobs: React.FC = () => {
+  let navigate = useNavigate();
+
+  const handleBack = () => {
+    navigate('/')
+  }
+
   return (
     <div>
       <h1>Jobs</h1>
 
       <p>
-      <Subcategory title="Careers" path="/Jobs/Careers" /> </p>
+      <Subcategory title="Careers" path="/jobs/Careers" /> </p>
       <p>
-      <Subcategory title="CloudComputing" path="/Jobs/CloudComputing" /> </p><p>
-      <Subcategory title="Engineering" path="/Jobs/Engineering" /> </p><p>
-      <Subcategory title="Business" path="/Jobs/Business" /> </p>
+      <Subcategory title="CloudComputing" path="/jobs/CloudComputing" /> </p><p>
+      <Subcategory title="Engineering" path="/jobs/Engineering" /> </p><p>
+      <Subcategory title="Business" path="/jobs/Business" /> </p>
       <p>
-      <Subcategory title="Others" path="/Jobs/Others" /> </p>
-      {/* Add the rest of the subcategories */}
+      <Subcategory title="Others" path="/jobs/Others" /> </p>
+      <button onClick={handleBack}>Back</button>
     </div>
   );
 };

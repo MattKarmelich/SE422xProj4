@@ -1,8 +1,15 @@
 // pages/ForSale.tsx
 import React from 'react';
 import Subcategory from '../components/Subcategory';
+import { useNavigate } from 'react-router-dom';
 
 const ForSale: React.FC = () => {
+  let navigate = useNavigate();
+
+  const handleBack = () => {
+    navigate('/')
+  }
+
   return (
     <div>
       <h1>For Sale</h1>
@@ -15,7 +22,7 @@ const ForSale: React.FC = () => {
       <Subcategory title="Books" path="/forsale/books" /> </p>
       <p>
       <Subcategory title="Furniture" path="/forsale/furniture" /> </p>
-      {/* Add the rest of the subcategories */}
+      <button onClick={handleBack}>Back</button>
     </div>
   );
 };
