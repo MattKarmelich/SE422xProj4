@@ -1,1 +1,0 @@
-export const backendRoute: string = "http://localhost:5000";
