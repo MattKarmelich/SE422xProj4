@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import userEP from '../endpoints/userEP';
 
 interface LoginPageProps {
   onEnter: (success: boolean, account: string) => void;
@@ -12,9 +13,9 @@ const LoginPage: React.FC<LoginPageProps> = ({ onEnter }) => {
 
   let navigate = useNavigate();
 
-  const handleLogin = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    let success = true;
+    let success = await userEP(username, password, "login") === 1;
     setFailedAttempt(!success)
     onEnter(success, username);
   };
@@ -44,7 +45,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onEnter }) => {
       <label htmlFor="password">Password:</label>
       &nbsp;
       <input
-        type="password"
+        type="text"
         id="password"
         name="password"
         value={password}
