@@ -29,12 +29,12 @@ const App: React.FC = () => {
           enter ? <Landing logout={handleLogout}/>
           :
           <LoginPage onEnter={handleLogin} />} />
-        <Route path="/forsale" element={<ForSale />} />
-        <Route path="/housing" element={<Housing />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/jobs" element={<Jobs />} />
-        <Route path="/community" element={<Community />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/forsale/*" element={<ForSale />} />
+        <Route path="/housing/*" element={<Housing />} />
+        <Route path="/services/*" element={<Services />} />
+        <Route path="/jobs/*" element={<Jobs />} />
+        <Route path="/community/*" element={<Community />} />
+        <Route path="/register/*" element={<Register />} />
       </Routes>
     </Router>
   );
