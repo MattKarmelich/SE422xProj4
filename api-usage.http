@@ -1,5 +1,5 @@
 ### Register request
-POST http://localhost:5000/register
+POST https://localhost:5000/register
 Content-Type: application/json
 
 {
@@ -8,7 +8,7 @@ Content-Type: application/json
 }
 
 ### Login request
-POST http://localhost:5000/login
+POST https://localhost:5000/login
 Content-Type: application/json
 
 {
@@ -18,7 +18,7 @@ Content-Type: application/json
 
 <> 2023-05-03T155523.200.json
 ### Create new posting
-POST http://localhost:5000/posting
+POST https://localhost:5000/posting
 Content-Type: application/json
 
 {
@@ -28,13 +28,13 @@ Content-Type: application/json
 }
 
 ### Get all listings
-GET http://localhost:5000/posting
+GET https://localhost:5000/posting
 
 <> 2023-05-03T160209.200.json
 ### Get specific listing (id is the last argument)
-GET http://localhost:5000/posting/6452cb99d177b07cf40cf053
+GET https://localhost:5000/posting/6452cb99d177b07cf40cf053
 
 ### Get by category (it searches by the key "category")
-GET http://localhost:5000/posting/category
+GET https://localhost:5000/posting/category
 Category: "forsale/
 

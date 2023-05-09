@@ -6,6 +6,7 @@ async function postAd(cat, fields) {
     const response = await fetch(`${backendRoute}/posting`, {
       method: 'POST',
       body: JSON.stringify({
+        username: document.cookie.replace("username=", ""),
         category: cat,
         fields: fields
       }),

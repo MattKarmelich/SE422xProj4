@@ -1,17 +1,20 @@
-from flask import Flask, request, jsonify, session
+from flask import Flask, request, jsonify, session, make_response
 from pymongo import MongoClient
 from datetime import timedelta
 from bson.objectid import ObjectId
-from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
-CORS(app)
 
-# Set the secret key for session management
-app.secret_key = 'mysecretkey'
 
-# Set the session lifetime to 6 hours
-app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=6)
+sessions = []
+
+@app.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3000')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization,Cookie,category,session')
+    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+    response.headers.add('Access-Control-Allow-Credentials', 'true')
+    return response
 
 '''
 To run the mongo server, just make sure docker is installed and run the following:
@@ -27,23 +30,20 @@ users_collection = db['users']
 postings_collection = db['postings']
 
 @app.route('/posting', methods=['POST', 'GET'])
-@cross_origin()
 def postings():
     if request.method == 'POST':
-        # Check if the user is logged in
-        #print(str(session['username']))
-        #if 'username' not in session:
-         #   return jsonify({'error': 'User not logged in'}), 401
-
         # Get the posting data from the request body
         posting_data = request.json
+
+        # Check if the user is logged in
+        if posting_data['username'] is "" or posting_data['username'] not in sessions:
+            return jsonify({'error': 'User not logged in'}), 401
 
         # Generate a new ObjectId for the posting
         posting_id = str(ObjectId())
 
         # Add the posting ID and username to the posting data
         posting_data['_id'] = posting_id
-        posting_data['username'] = "loforney"
 
         # Insert the posting data into the database
         postings_collection.insert_one(posting_data)
@@ -59,7 +59,6 @@ def postings():
         return jsonify(postings)
 
 @app.route('/posting/category', methods=['GET'])
-@cross_origin()
 def postings_by_category():
     category = request.headers.get('Category')
     print(category)
@@ -71,7 +70,6 @@ def postings_by_category():
     return jsonify(postings)
 
 @app.route('/posting/<id>', methods=['GET'])
-@cross_origin()
 def posting_by_id(id):
     # Find the posting with the specified ID
     posting = postings_collection.find_one({'_id': id})
@@ -84,7 +82,6 @@ def posting_by_id(id):
         return jsonify({'error': 'Posting not found'}), 404
 
 @app.route('/register', methods=['POST'])
-@cross_origin()
 def register():
     # Get username and password from the request body
     username = request.json['username']
@@ -103,7 +100,6 @@ def register():
     return jsonify({'message': 'User registered successfully'})
 
 @app.route('/login', methods=['POST'])
-@cross_origin()
 def login():
     # Get username and password from the request body
     username = request.json['username']
@@ -114,20 +110,21 @@ def login():
 
     if user:
         # Set the 'username' key in the session to log the user in
-        session['username'] = username
-        session.permanent = True  # Make the session permanent
+
+        sessions.append(username)
 
         # Return a success message
-        return jsonify({'message': 'User logged in successfully'})
+        return jsonify({'message': 'User logged in successfully', 'username': username})
     else:
         # Return an error message
         return jsonify({'error': 'Invalid username or password'}), 401
 
 @app.route('/logout', methods=['POST'])
-@cross_origin()
 def logout():
     # Remove the 'username' key from the session to log the user out
-    session.pop('username', None)
+
+    if request.json['username'] in sessions:
+        sessions.remove(request.json['username'])
 
     # Return a success message
     return jsonify({'message': 'User logged out successfully'})

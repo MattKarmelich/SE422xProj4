@@ -17,7 +17,6 @@ export const PostingsView: FunctionComponent<PostingsProps> = ({ category }) => 
         })
             .then((response) => response.json())
             .then((data) => {
-                console.log("Got data");
                 setPostings(data);
             });
     }, [category]);
@@ -28,6 +27,7 @@ export const PostingsView: FunctionComponent<PostingsProps> = ({ category }) => 
             <h1>{category}</h1>
             {postings.map((posting) => (
                 <div
+                    key={posting['_id']}
                     style={{
                         margin: 24,
                         display: 'grid',

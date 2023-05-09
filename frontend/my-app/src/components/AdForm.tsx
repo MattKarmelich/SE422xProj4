@@ -12,10 +12,24 @@ export function AdForm({ category, dataModel }: AdFormProps) {
         postAd(category, fields);
     };
 
-    return (
-        <NewEntry
-            onSubmit={handleSubmit}
-            fields={Object.keys(dataModel)}
-        />
-    );
+    if (document.cookie.includes('username')) {
+        return (
+            <NewEntry
+                onSubmit={handleSubmit}
+                fields={Object.keys(dataModel)}
+            />
+        );
+    } else {
+        return (
+            <div>
+                <h4 style={{
+                    textAlign: "center"
+                }}>
+                    Please <a href={"/"}>login</a> to create a new posting
+                </h4>
+            </div>
+        )
+    }
+
+
 }
