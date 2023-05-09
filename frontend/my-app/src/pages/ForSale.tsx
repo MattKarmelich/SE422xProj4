@@ -2,29 +2,21 @@
 import React, {useEffect, useState} from 'react';
 import Subcategory from '../components/Subcategory';
 import {useNavigate, useParams} from 'react-router-dom';
-import { TrucksAndCars } from '../types';
-import CarForm from "./forSaleSub/CarForm";
+import {Boats, Books, Furniture, Motorcycles, TrucksAndCars} from '../types';
+import PostingsView from "../components/PostingsView";
+import {AdForm} from "../components/AdForm";
 
 const ForSale: React.FC = () => {
     let navigate = useNavigate();
     const wildcard = useParams()["*"];
 
-    const [postings, setPostings] = useState([]);
-
     const handleBack = () => {
         navigate('/')
     }
 
-    useEffect(() => {
-        fetch(`/posting/category/${wildcard}`)
-            .then((response) => response.json())
-            .then((data) => {
-                setPostings(data);
-            });
-    }, [wildcard]);
+    var dataModel: any;
 
     if (wildcard === "") {
-        console.log(wildcard);
         return (
             <div>
                 <h1>For Sale</h1>
@@ -41,26 +33,38 @@ const ForSale: React.FC = () => {
             </div>
         );
     } else {
-        // @ts-ignore
-        return (
-            <div>
-                <h1>{wildcard}</h1>
-                {postings.map((posting) => (
-                    <div key={posting['_id']}>
-                        <h2>{posting['username']}</h2>
-                        <p>ID: {posting['_id']}</p>
-                        {Object.entries(posting['fields']).map(([key, value]) => (
-                            <div key={key}>
-                                <p>{key}:</p>
-                                <p>{String(value)}</p>
-                            </div>
-                        ))}
-                    </div>
-                ))}
-                <CarForm />
-                <button onClick={handleBack}>Back</button>
-            </div>
-        )
+        if (wildcard !== undefined && wildcard) {
+            switch (wildcard) {
+                case 'cars-trucks':
+                    dataModel = new TrucksAndCars();
+                    break;
+                case 'motorcycles':
+                    dataModel = new Motorcycles();
+                    break;
+                case 'boats':
+                    dataModel = new Boats();
+                    break;
+                case 'books':
+                    dataModel = new Books();
+                    break;
+                case 'furniture':
+                    dataModel = new Furniture();
+                    break;
+            }
+            return (
+                <div>
+                    <PostingsView category={"forsale/" + wildcard} />
+                    <AdForm
+                        category={"forsale/" + wildcard}
+                        dataModel={dataModel as any}
+                    />
+                    <button onClick={handleBack}>Back</button>
+                </div>
+            )
+        } else {
+            return (<p>Error</p>)
+        }
+
     }
 
 };

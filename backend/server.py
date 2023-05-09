@@ -31,9 +31,9 @@ postings_collection = db['postings']
 def postings():
     if request.method == 'POST':
         # Check if the user is logged in
-        print(str(session['username']))
-        if 'username' not in session:
-            return jsonify({'error': 'User not logged in'}), 401
+        #print(str(session['username']))
+        #if 'username' not in session:
+         #   return jsonify({'error': 'User not logged in'}), 401
 
         # Get the posting data from the request body
         posting_data = request.json
@@ -43,7 +43,7 @@ def postings():
 
         # Add the posting ID and username to the posting data
         posting_data['_id'] = posting_id
-        posting_data['username'] = session['username']
+        posting_data['username'] = "loforney"
 
         # Insert the posting data into the database
         postings_collection.insert_one(posting_data)
@@ -58,9 +58,12 @@ def postings():
         # Return the postings in JSON format
         return jsonify(postings)
 
-@app.route('/posting/category/<category>', methods=['GET'])
+@app.route('/posting/category', methods=['GET'])
 @cross_origin()
-def postings_by_category(category):
+def postings_by_category():
+    category = request.headers.get('Category')
+    print(category)
+
     # Find all postings with the specified category
     postings = list(postings_collection.find({'category': category}))
 

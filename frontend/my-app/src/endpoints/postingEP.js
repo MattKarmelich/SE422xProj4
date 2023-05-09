@@ -7,7 +7,7 @@ async function postAd(cat, fields) {
       method: 'POST',
       body: JSON.stringify({
         category: cat,
-        ...fields
+        fields: fields
       }),
       headers: {
         'Content-Type': 'application/json',

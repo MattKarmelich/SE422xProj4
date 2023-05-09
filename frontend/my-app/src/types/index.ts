@@ -1,4 +1,8 @@
-export interface TrucksAndCars {
+import React from "react";
+import NewEntry from "../components/NewEntry";
+import {postAd} from "../endpoints/postingEP";
+
+export class TrucksAndCars {
   year?: string;
   make?: string;
   model?: string;
@@ -12,7 +16,7 @@ export interface TrucksAndCars {
   // Add the rest of the fields as needed
 }
 
-export interface Motorcycles {
+export class Motorcycles {
   year?: string;
   make?: string;
   model?: string;
@@ -25,7 +29,7 @@ export interface Motorcycles {
   contact?: string;
 }
 
-export interface Boats {
+export class Boats {
   year?: string;
   make?: string;
   model?: string;
@@ -38,7 +42,7 @@ export interface Boats {
   contact?: string;
 }
 
-export interface Books {
+export class Books {
   title?: string;
   author?: string;
   genre?: string;
@@ -50,7 +54,7 @@ export interface Books {
   contact?: string;
 }
 
-export interface Furniture {
+export class Furniture {
   furnitureType?: string;
   material?: string;
   style?: string;
@@ -61,7 +65,7 @@ export interface Furniture {
   contact?: string;
 }
 
-export interface Apartments {
+export class Apartments {
   bedrooms?: number;
   bathrooms?: number;
   squareFootage?: string;
@@ -74,7 +78,7 @@ export interface Apartments {
   contact?: string;
 }
 
-export interface RentalHouse {
+export class RentalHouse {
   bedrooms?: number;
   bathrooms?: number;
   squareFootage?: string;
@@ -87,7 +91,7 @@ export interface RentalHouse {
   contact?: string;
 }
 
-export interface PurchaseHouse {
+export class PurchaseHouse {
   bedrooms?: number;
   bathrooms?: number;
   squareFootage?: string;
@@ -100,7 +104,7 @@ export interface PurchaseHouse {
   contact?: string;
 }
 
-export interface RoommateAds {
+export class RoommateAds {
   roommatesWanted?: number;
   rent?: string;
   utilitiesIncluded?: string;
@@ -111,7 +115,7 @@ export interface RoommateAds {
   contact?: string;
 }
 
-export interface TownHouse {
+export class TownHouse {
   bedrooms?: number;
   bathrooms?: number;
   squareFootage?: string;
@@ -124,7 +128,7 @@ export interface TownHouse {
   contact?: string;
 }
 
-export interface Babysitting {
+export class Babysitting {
   ageRangeOfChildren?: string;
   experience?: string;
   availability?: string;
@@ -135,7 +139,7 @@ export interface Babysitting {
   contact?: string;
 }
 
-export interface DogWalking {
+export class DogWalking {
   breedOfDog?: string;
   location?: string;
   experience?: string;
@@ -146,7 +150,7 @@ export interface DogWalking {
   contact?: string;
 }
 
-export interface ArtCommissions {
+export class ArtCommissions {
   typeOfArt?: string;
   medium?: string;
   size?: string;
@@ -157,7 +161,7 @@ export interface ArtCommissions {
   contact?: string;
 }
 
-export interface FreelanceDevelopment {
+export class FreelanceDevelopment {
   type?: string;
   languages?: string;
   experience?: string;
@@ -168,7 +172,7 @@ export interface FreelanceDevelopment {
   contact?: string;
 }
 
-export interface Gardening {
+export class Gardening {
   serviceType?: string;
   experience?: string;
   availability?: string;
@@ -179,7 +183,7 @@ export interface Gardening {
   contact?: string;
 }
 
-export interface ManualLabor {
+export class ManualLabor {
   workType?: string;
   experience?: string;
   hours?: string;
@@ -190,7 +194,7 @@ export interface ManualLabor {
   contact?: string;
 }
 
-export interface Retail {
+export class Retail {
   jobTitle?: string;
   company?: string;
   retailType?: string;
@@ -201,7 +205,7 @@ export interface Retail {
   contact?: string;
 }
 
-export interface SoftwareDevelopment {
+export class SoftwareDevelopment {
   type?: string;
   languages?: string;
   experience?: string;
@@ -212,7 +216,7 @@ export interface SoftwareDevelopment {
   contact?: string;
 }
 
-export interface SoftwareDesign {
+export class SoftwareDesign {
   designType?: string;
   toolsSoftware?: string;
   experience?: string;
@@ -223,7 +227,7 @@ export interface SoftwareDesign {
   contact?: string;
 }
 
-export interface Security {
+export class Security {
   jobTitle?: string;
   company?: string;
   securityType?: string;
@@ -235,7 +239,7 @@ export interface Security {
   contact?: string;
 }
 
-export interface Athletics {
+export class Athletics {
   sportType?: string;
   skillLevel?: string;
   meetingTime?: string;
@@ -246,7 +250,7 @@ export interface Athletics {
   contact?: string;
 }
 
-export interface Pet {
+export class Pet {
   petType?: string;
   breeds?: string;
   size?: string;
@@ -257,7 +261,7 @@ export interface Pet {
   contact?: string;
 }
 
-export interface Academic {
+export class Academic {
   subjects?: string;
   gradeLevel?: string;
   educationRequirement?: string;
@@ -268,7 +272,7 @@ export interface Academic {
   contact?: string;
 }
 
-export interface Developer {
+export class Developer {
   type?: string;
   languages?: string;
   experienceRequired?: string;
@@ -279,7 +283,7 @@ export interface Developer {
   contact?: string;
 }
 
-export interface Elderly {
+export class Elderly {
   activities?: string;
   minimumAge?: number;
   communityLeaders?: string;

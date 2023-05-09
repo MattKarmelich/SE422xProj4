@@ -35,5 +35,6 @@ GET http://localhost:5000/posting
 GET http://localhost:5000/posting/6452cb99d177b07cf40cf053
 
 ### Get by category (it searches by the key "category")
-GET http://localhost:5000/posting/category/jobs
+GET http://localhost:5000/posting/category
+Category: "forsale/
 
