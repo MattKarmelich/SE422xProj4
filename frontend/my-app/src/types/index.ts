@@ -2,6 +2,8 @@ import React from "react";
 import NewEntry from "../components/NewEntry";
 import {postAd} from "../endpoints/postingEP";
 
+export class DefaultProto {}
+
 export class TrucksAndCars {
   year?: string;
   make?: string;

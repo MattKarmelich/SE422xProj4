@@ -4,6 +4,8 @@ import Subcategory from '../components/Subcategory';
 import {useNavigate, useParams} from 'react-router-dom';
 import PostingsView from "../components/PostingsView";
 import {AdForm} from "../components/AdForm";
+import {ArtCommissions, Babysitting, DogWalking, FreelanceDevelopment, Gardening} from "../types";
+import {DefaultProto} from "../types";
 
 const Services: React.FC = () => {
     let navigate = useNavigate();
@@ -13,27 +15,44 @@ const Services: React.FC = () => {
         navigate('/')
     }
 
-    var dataModel: any;
+    var dataModel: any = new DefaultProto();
 
     if (wildcard === "") {
         return (
             <div>
                 <h1>Services</h1>
                 <p>
-                    <Subcategory title="Repair" path="/services/repair"/></p>
+                    <Subcategory title="Babysitting" path="/services/babysitting" /></p>
                 <p>
-                    <Subcategory title="Financial Services" path="/services/financialservices"/></p>
+                    <Subcategory title="Dog walking" path="/services/dogwalking"/></p>
                 <p>
-                    <Subcategory title="Construction" path="/services/Construction"/></p>
+                    <Subcategory title="Art commissions" path="/services/artcommissions"/></p>
                 <p>
-                    <Subcategory title="PublicRelation" path="/services/PublicRelation"/></p>
+                    <Subcategory title="Freelance development" path="/services/freelancedevelopment"/></p>
                 <p>
-                    <Subcategory title="HealthCare" path="/services/HealthCare"/></p>
+                    <Subcategory title="Gardening" path="/services/gardening"/></p>
                 <button onClick={handleBack}>Back</button>
             </div>
         );
     } else {
         if (wildcard !== undefined && wildcard) {
+            switch (wildcard) {
+                case 'babysitting':
+                    dataModel = new Babysitting();
+                    break;
+                case 'dogwalking':
+                    dataModel = new DogWalking();
+                    break;
+                case 'artcommissions':
+                    dataModel = new ArtCommissions();
+                    break;
+                case 'freelancedevelopment':
+                    dataModel = new FreelanceDevelopment();
+                    break;
+                case 'gardening':
+                    dataModel = new Gardening();
+                    break;
+            }
             return (
                 <div>
                     <PostingsView category={"services/" + wildcard}/>

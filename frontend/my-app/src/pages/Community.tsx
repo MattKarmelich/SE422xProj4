@@ -4,6 +4,7 @@ import Subcategory from '../components/Subcategory';
 import {useNavigate, useParams} from 'react-router-dom';
 import PostingsView from "../components/PostingsView";
 import {AdForm} from "../components/AdForm";
+import {Academic, Athletics, DefaultProto, Developer, Elderly, Pet} from "../types";
 
 const Community: React.FC = () => {
 
@@ -14,26 +15,43 @@ const Community: React.FC = () => {
         navigate('/')
     }
 
-    var dataModel: any;
+    var dataModel: any = new DefaultProto();
 
     if (wildcard === "") {
         return (
             <div>
                 <h1>Community</h1>
-                <Subcategory title="Residential" path="/community/residential"/>
+                    <Subcategory title="Athletics" path="/community/athletics"/>
                 <p>
-                    <Subcategory title="mission" path="/community/mission"/></p>
+                    <Subcategory title="Pets" path="/community/pets"/></p>
                 <p>
-                    <Subcategory title="rural" path="/community/rural"/></p>
+                    <Subcategory title="Academic" path="/community/academic"/></p>
                 <p>
-                    <Subcategory title="urban" path="/community/urban"/></p>
+                    <Subcategory title="Developer" path="/community/developer"/></p>
                 <p>
-                    <Subcategory title="retired-housing" path="/community/retired"/></p>
+                    <Subcategory title="Elderly" path="/community/elderly"/></p>
                 <button onClick={handleBack}>Back</button>
             </div>
         );
     } else {
         if (wildcard !== undefined && wildcard) {
+            switch (wildcard) {
+                case 'athletics':
+                    dataModel = new Athletics();
+                    break;
+                case 'pets':
+                    dataModel = new Pet();
+                    break;
+                case 'academic':
+                    dataModel = new Academic();
+                    break;
+                case 'developer':
+                    dataModel = new Developer();
+                    break;
+                case 'elderly':
+                    dataModel = new Elderly();
+                    break;
+            }
             return (
                 <div>
                     <PostingsView category={"community/" + wildcard}/>

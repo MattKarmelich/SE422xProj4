@@ -3,8 +3,10 @@ import React from 'react';
 import Subcategory from '../components/Subcategory';
 import {useNavigate, useParams} from 'react-router-dom';
 import PostingsView from "../components/PostingsView";
-import {Apartments} from "../types";
+import {Apartments, PurchaseHouse, RentalHouse, RoommateAds, TownHouse} from "../types";
 import {AdForm} from "../components/AdForm";
+import ForSale from "./ForSale";
+import {DefaultProto} from "../types";
 
 const Housing: React.FC = () => {
 
@@ -15,21 +17,21 @@ const Housing: React.FC = () => {
         navigate('/')
     }
 
-    var dataModel: any;
+    var dataModel: any = new DefaultProto();
 
     if (wildcard === "") {
         return (
             <div>
                 <h1>Housing</h1>
-                <Subcategory title="apartment" path="/housing/apartment"/>
+                <Subcategory title="Apartments" path="/housing/apartments"/>
                 <p>
-                    <Subcategory title="bungalow" path="/housing/bungalow"/></p>
+                    <Subcategory title="Houses for rental" path="/housing/forrent"/></p>
                 <p>
-                    <Subcategory title="FarmHouse" path="/housing/farmhouse"/></p>
+                    <Subcategory title="Houses for purchase" path="/housing/forpurchase"/></p>
                 <p>
-                    <Subcategory title="Condos" path="/housing/condos"/></p>
+                    <Subcategory title="Roomate search" path="/housing/roomates"/></p>
                 <p>
-                    <Subcategory title="Contact" path="/housing/contact"/>
+                    <Subcategory title="Town houses" path="/housing/townhouses"/>
                 </p>
                 <button onClick={handleBack}>Back</button>
             </div>
@@ -37,8 +39,20 @@ const Housing: React.FC = () => {
     } else {
         if (wildcard !== undefined && wildcard) {
             switch (wildcard) {
-                case 'apartment':
+                case 'apartments':
                     dataModel = new Apartments();
+                    break;
+                case 'forrent':
+                    dataModel = new RentalHouse();
+                    break;
+                case 'forpurchase':
+                    dataModel = new PurchaseHouse();
+                    break;
+                case 'roomates':
+                    dataModel = new RoommateAds();
+                    break;
+                case 'townhouses':
+                    dataModel = new TownHouse();
                     break;
             }
             return (

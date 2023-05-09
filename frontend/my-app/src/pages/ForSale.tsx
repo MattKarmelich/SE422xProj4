@@ -5,6 +5,7 @@ import {useNavigate, useParams} from 'react-router-dom';
 import {Boats, Books, Furniture, Motorcycles, TrucksAndCars} from '../types';
 import PostingsView from "../components/PostingsView";
 import {AdForm} from "../components/AdForm";
+import {DefaultProto} from "../types";
 
 const ForSale: React.FC = () => {
     let navigate = useNavigate();
@@ -14,7 +15,7 @@ const ForSale: React.FC = () => {
         navigate('/')
     }
 
-    var dataModel: any;
+    var dataModel: any = new DefaultProto();
 
     if (wildcard === "") {
         return (
