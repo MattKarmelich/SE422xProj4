@@ -1,1 +1,1 @@
-export const backendRoute = "http://localhost:5000";
+export const backendRoute = "/api";

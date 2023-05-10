@@ -12,7 +12,7 @@ export function AdForm({ category, dataModel }: AdFormProps) {
         postAd(category, fields);
     };
 
-    if (document.cookie.includes('username')) {
+    if (localStorage.getItem('username') !== null) {
         return (
             <NewEntry
                 onSubmit={handleSubmit}

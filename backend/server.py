@@ -3,14 +3,13 @@ from pymongo import MongoClient
 from datetime import timedelta
 from bson.objectid import ObjectId
 
-app = Flask(__name__)
-
+app = Flask(__name__, static_folder='app', static_url_path="/")
 
 sessions = []
 
 @app.after_request
 def after_request(response):
-    response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3000')
+    response.headers.add('Access-Control-Allow-Origin', '*')
     response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization,Cookie,category,session')
     response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
     response.headers.add('Access-Control-Allow-Credentials', 'true')
@@ -36,7 +35,7 @@ def postings():
         posting_data = request.json
 
         # Check if the user is logged in
-        if posting_data['username'] is "" or posting_data['username'] not in sessions:
+        if posting_data['username'] == "" or posting_data['username'] not in sessions:
             return jsonify({'error': 'User not logged in'}), 401
 
         # Generate a new ObjectId for the posting
@@ -130,4 +129,4 @@ def logout():
     return jsonify({'message': 'User logged out successfully'})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0", port="5000")

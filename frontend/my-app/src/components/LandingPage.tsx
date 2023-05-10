@@ -7,7 +7,7 @@ interface LandingPageProps {
 
 const LandingPage: React.FC<LandingPageProps> = ({ logout }) => {
   const handleLogout = () => {
-      document.cookie = '';
+      localStorage.removeItem('username')
     logout();
   };
   return (
